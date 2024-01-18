@@ -1,18 +1,17 @@
 import { DeployStrParams, SDK, SessionStrParams, privateToPublicKey, Bytes, DeployHash, PublicKey, motesToCSPR } from 'casper-sdk';
 const fs = require('fs').promises;
-const http = require('http');
 
 const node_address = 'http://127.0.0.1:11101';
 const sdk = new SDK(node_address);
 const chain_name = 'casper-net-1';
 const private_key = `-----BEGIN PRIVATE KEY-----
-MC4CAQAwBQYDK2VwBCIEIDvOJ4uk5ce6QgyZNcbs0z6gISoilgNmO0JYELCF8vTo
+MC4CAQAwBQYDK2VwBCIEILmJzgugrlFHS+UX7Ah/UpacP8xKfiAmbgYbJCBstI+Z
   -----END PRIVATE KEY-----`;
 const public_key = privateToPublicKey(private_key);
 const account_hash = new PublicKey(public_key).toAccountHash().toFormattedString();
 
 const private_key_user = `-----BEGIN PRIVATE KEY-----
-MC4CAQAwBQYDK2VwBCIEIJjKwXTU3s5Xm9d/sMOTHyLoI1DHTmxXfUXdLu84D+VS
+MC4CAQAwBQYDK2VwBCIEIBN46qdO88VEx6amKBMyMbK0OpmkwH3QgUAzzDsnwFti
   -----END PRIVATE KEY-----`;
 const public_key_user = privateToPublicKey(private_key_user);
 const account_hash_user = new PublicKey(public_key_user).toAccountHash().toFormattedString();
@@ -69,7 +68,7 @@ const install = async () => {
 const mint = async (contract_hash: string, token_index: number) => {
   const token_owner = account_hash;
   const entry_point = 'mint';
-  const payment_amount = '2000000000';
+  const payment_amount = '3000000000';
 
   const deploy_params = new DeployStrParams(chain_name, public_key, private_key);
 
@@ -92,7 +91,7 @@ const transfer = async (contract_hash: string, token_index: number) => {
   const source_key = account_hash;
   const target_key = account_hash_user;
   const entry_point = 'transfer';
-  const payment_amount = '2000000000';
+  const payment_amount = '3000000000';
 
   const deploy_params = new DeployStrParams(chain_name, public_key, private_key);
 
